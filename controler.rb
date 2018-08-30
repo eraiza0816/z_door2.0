@@ -3,7 +3,7 @@ require './servo.rb'
 require 'pasori'
 
 def nfc()
-    `sudo ruby ./felica_dump.rb`
+    `sudo ruby ~/tmp/pasori/libpafe-ruby/sample/felica_dump.rb`
     #`sudo python ~/tmp/pasori/zaregoto_door/nfcpy/examples/tagtool.py`
 end
 
@@ -25,13 +25,15 @@ def lock()
 end
 
 
-### def cpu_temp()
+### def cpu_temp(text)
 ###   cpu_temp = %x[vcgencmd measure_temp]
 ### end
 
-def cpu_temp()
+## test code
+def cpu_temp(text)
   cpu_temp = 0
 end
+## test code
 
 #def log(unlock_user,operation)
 #  File.open("log.txt","a") do |f|
@@ -55,13 +57,9 @@ loop do
         lock
         puts("locked\n")
         %x[curl -X POST -H "Content-Type: application/json" -d '{"value1":"#{unlock_user}","value2":"control","value3":"#{cpu_temp}"}' https://maker.ifttt.com/trigger/keyLogAddSPsheet/with/key/bJh5tK010oplTRDxJ9zu2K]
-
-
     else
         print("***Illegal user***\n")
         %x[curl -X POST -H "Content-Type: application/json" -d '{"value1":"#{idm}","value2":"NO AUTHORITY","value3":"#{cpu_temp}"}' https://maker.ifttt.com/trigger/keyLogAddSPsheet/with/key/bJh5tK010oplTRDxJ9zu2K]
-
-
     end
 
     print("Please wait reader restart...\n")
