@@ -1,8 +1,7 @@
-# Zaregoto_door2.0
+# z_door2.0
 `nfcpy`は廃止されました。（時代を逆行）  
 S330で動くことを期待します。  
-`libpafe` `libpafe-ruby` を使います。  
---以下修正中。--
+このヴァージョンでは`libpafe` `libpafe-ruby` を使います。  
 
 # install
 
@@ -27,7 +26,7 @@ make install
 ```  
 うまく行かないときは **sudo**  つけると動いたりする。
 
-## install libpafe
+## install libpafe-ruby
 ```
 git clone https://github.com/rfujita/libpafe-ruby.git  
 cd libpafe-ruby
@@ -37,7 +36,7 @@ make install
 ```
 
 # Test
-**sudo** 付けまくってるので `ruby`の実行時もsudoでやる。
+**sudo** 付けまくってるので `ruby`の実行時も `sudo` を付けてください。
 
 ```
 cd libpafe-ruby
@@ -45,7 +44,7 @@ sudo ruby felica_dump.rb
 ```
 
 # Start
-`cd ///zaregoto_door`  
+`cd z_door2.0`  
 `ruby controler.rb`
 
 # Files
@@ -55,4 +54,4 @@ sudo ruby felica_dump.rb
 |servo.rb|Saved servo motor info|
 
 # Log
-[hire](https://docs.google.com/spreadsheets/d/16dnM_fcZhj-seAavndLCHZvxERE-6B52Ia5F663mC1Q/edit#gid=0)
+[hire](https://docs.google.com/spreadsheets/d/16dnM_fcZhj-seAavndLCHZvxERE-6B52Ia5F663mC1Q/)
