@@ -1,8 +1,10 @@
 require './authed_cards.rb'
 require './servo.rb'
+require 'pasori'
 
 def nfc()
-    `sudo python ~/tmp/pasori/zaregoto_door/nfcpy/examples/tagtool.py`
+    `sudo ruby ./felica_dump.rb`
+    #`sudo python ~/tmp/pasori/zaregoto_door/nfcpy/examples/tagtool.py`
 end
 
 def idm(text)
@@ -22,12 +24,12 @@ def lock()
     `echo #{SERVO_PIN}=#{LOCK_ANGLE}% > /dev/servoblaster`
 end
 
-def log(unlock_user,operation)
-  File.open("log.txt","a") do |f|
-    f.print("#{Time.now},#{unlock_user},#{operation}\n")
-  end
-  print("\n#{Time.now},#{unlock_user},#{operation}\n")
-end
+#def log(unlock_user,operation)
+#  File.open("log.txt","a") do |f|
+#    f.print("#{Time.now},#{unlock_user},#{operation}\n")
+#  end
+#  print("\n#{Time.now},#{unlock_user},#{operation}\n")
+#end
 
 loop do
     idm = idm(nfc)
