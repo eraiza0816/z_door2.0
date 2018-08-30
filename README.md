@@ -27,6 +27,23 @@ make install
 ```  
 うまく行かないときは **sudo**  つけると動いたりする。
 
+## install libpafe
+```
+git clone https://github.com/rfujita/libpafe-ruby.git  
+cd libpafe-ruby
+ruby extconf.rb
+make
+make install
+```
+
+# Test
+**sudo** 付けまくってるので `ruby`の実行時もsudoでやる。
+
+```
+cd libpafe-ruby
+sudo ruby felica_dump.rb
+```
+
 # Start
 `cd ///zaregoto_door`  
 `ruby controler.rb`
