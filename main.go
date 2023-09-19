@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"moter"
 	"os"
 	"os/exec"
 	"os/signal"
@@ -18,6 +17,7 @@ import (
 const (
 	LockPin   = 23
 	UnlockPin = 24
+	servoPin  = 18
 )
 
 var (
@@ -95,17 +95,17 @@ func getIdm(text string) string {
 
 func unlock(config Config) {
 	fmt.Println("Unlocking")
-	moter.RunMoter(fmt.Sprint(config.UnlockAngle))
+	RunMoter(fmt.Sprint(config.UnlockAngle))
 	time.Sleep(time.Duration(config.SleepSec) * time.Second)
-	moter.RunMoter("0")
+	RunMoter("0")
 	fmt.Println("Unlocked")
 }
 
 func lock(config Config) {
 	fmt.Println("Locking")
-	moter.RunMoter(fmt.Sprint(config.LockAngle))
+	RunMoter(fmt.Sprint(config.LockAngle))
 	time.Sleep(time.Duration(config.SleepSec) * time.Second)
-	moter.RunMoter("0")
+	RunMoter("0")
 	fmt.Println("Locked")
 }
 
@@ -148,4 +148,24 @@ func button(config Config) {
 		}
 		time.Sleep(500 * time.Millisecond)
 	}
+}
+
+func RunMoter(moveDeg string) {
+	err := rpio.Open()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer rpio.Close()
+
+	pin := rpio.Pin(servoPin)
+	pin.Mode(rpio.Pwm)
+	pin.Freq(1920)
+	pin.DutyCycle(0, 1024)
+
+	fmt.Println(moveDeg)
+
+	pin.DutyCycle(uint32(moveDeg), 1024)
+
+	time.Sleep(1 * time.Second)
 }
