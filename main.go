@@ -11,12 +11,18 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/bamchoh/pasori"
 	rpio "github.com/stianeikeland/go-rpio"
 )
 
 const (
 	LockPin   = 23
 	UnlockPin = 24
+)
+
+var (
+	VID uint16 = 0x054C // SONY
+	PID uint16 = 0x06C3 // RC-S380
 )
 
 type Config struct {
@@ -31,6 +37,12 @@ type Users map[string]string
 func main() {
 	config := loadConfig()
 	users := loadUsers()
+
+	idm, err := pasori.GetID(VID, PID)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(idm)
 
 	go button(config)
 
