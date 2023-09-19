@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"os/signal"
 	"regexp"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -165,7 +166,14 @@ func RunMoter(moveDeg string) {
 
 	fmt.Println(moveDeg)
 
-	pin.DutyCycle(uint32(moveDeg), 1024)
+	// 文字列から整数への変換
+	moveDegInt, err := strconv.Atoi(moveDeg)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	pin.DutyCycle(uint32(moveDegInt), 1024)
 
 	time.Sleep(1 * time.Second)
 }
