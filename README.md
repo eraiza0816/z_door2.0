@@ -22,7 +22,7 @@ go run main.go
 ### GPIO構成
 
 ```shell
-SERVO_PWM = gpio18
+SERVO_PWM #gpio18
 UNLOCK_BUTTON_PIN #gpio23
 LOCK_BUTTON_PIN #gpio24
 ```
