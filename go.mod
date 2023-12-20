@@ -1,6 +1,8 @@
 module github.com/eraiza0816/zaregoto_door
 
-go 1.21.1
+go 1.21
+
+toolchain go1.21.1
 
 require (
 	github.com/bamchoh/pasori v0.0.0-20190321133732-ca188cfb16ba
